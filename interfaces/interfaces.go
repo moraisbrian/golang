@@ -11,8 +11,8 @@ func (c Car) start() string {
 }
 
 type Car struct {
-	CarName string `json:"car"`
-	CarYear int    `json:"year"`
+	CarName string
+	CarYear int
 }
 
 func ExemploInerface(c veiculo) {
