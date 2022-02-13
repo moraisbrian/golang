@@ -2,6 +2,9 @@ package ponteiro
 
 import "fmt"
 
+// & -> Referência de memória, obtem o endereço de memória
+// * -> Ponteiro, aponta para o valor da variável passada por referência
+
 var z *int
 
 func ExemploPonteiro() {
@@ -15,7 +18,7 @@ func ExemploPonteiro() {
 	// Valor da variável y (endereço de memória da variável x)
 	fmt.Println(y)
 
-	// valor da variável z (endereço de memória da variável x)
+	// Valor da variável z (endereço de memória da variável x)
 	fmt.Println(z)
 
 	// Tipo das variáveis

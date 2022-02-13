@@ -1,7 +1,7 @@
 package main
 
-import "Teste/ponteiro"
+import "Teste/interfaces"
 
 func main() {
-	ponteiro.ExemploPonteiro()
+	interfaces.UtilizandoInterface()
 }
