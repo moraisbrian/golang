@@ -1,7 +1,9 @@
 package main
 
-import "Teste/server"
+import (
+	"Teste/workers"
+)
 
 func main() {
-	server.Serve()
+	workers.Work()
 }
