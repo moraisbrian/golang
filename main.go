@@ -1,9 +1,9 @@
 package main
 
 import (
-	"Teste/workers"
+	"Teste/workers2"
 )
 
 func main() {
-	workers.Work()
+	workers2.Run()
 }
