@@ -1,4 +1,4 @@
-module Teste
+module estudos
 
 go 1.17
 

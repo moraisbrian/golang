@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Teste/workers2"
+	"estudos/workers2"
 )
 
 func main() {

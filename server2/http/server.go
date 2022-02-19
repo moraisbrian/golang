@@ -1,7 +1,7 @@
 package http
 
 import (
-	"Teste/server2/models"
+	"estudos/server2/models"
 	"net/http"
 
 	"github.com/labstack/echo/v4"

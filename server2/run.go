@@ -1,8 +1,8 @@
 package server2
 
 import (
-	"Teste/server2/http"
-	"Teste/server2/models"
+	"estudos/server2/http"
+	"estudos/server2/models"
 )
 
 func Run() {
