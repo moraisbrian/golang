@@ -15,7 +15,7 @@ func main() {
 	reminders := createReminders()
 	channel := make(chan Reminder)
 
-	for i := 1; i <= 100; i++ {
+	for i := 1; i <= 50; i++ {
 		go worker(channel)
 	}
 
@@ -26,20 +26,15 @@ func main() {
 
 func worker(channel chan Reminder) {
 	for reminder := range channel {
-		func() {
-			conn := database.GetConnection()
-			defer conn.SqlDb.Close()
+		res, err := database.CreateReminder(reminder.Title, reminder.Description, reminder.Alias)
 
-			res, err := conn.CreateReminder(reminder.Title, reminder.Description, reminder.Alias)
+		if err != nil {
+			fmt.Println(err.Error())
+		} else {
+			fmt.Println(res)
+		}
 
-			if err != nil {
-				fmt.Println(err.Error())
-			} else {
-				fmt.Println(res)
-			}
-
-			fmt.Println(reminder)
-		}()
+		fmt.Println(reminder)
 	}
 }
 

@@ -19,7 +19,7 @@ var (
 	database = "GoTeste"
 )
 
-func GetConnection() Database {
+func getConnection() Database {
 	connectionString := fmt.Sprintf("server=%s;user id=%s;password=%s;port=%d;database=%s;", server, user, password, port, database)
 
 	sqlObj, err := sql.Open("mssql", connectionString)
@@ -34,15 +34,18 @@ func GetConnection() Database {
 	return data
 }
 
-func (db Database) CreateReminder(title string, description string, alias string) (int64, error) {
+func CreateReminder(title string, description string, alias string) (int64, error) {
+
+	conn := getConnection()
+	defer conn.SqlDb.Close()
 
 	queryText := fmt.Sprintf("INSERT INTO Reminders (Title, Description, Alias) VALUES ('%s', '%s', '%s');", title, description, alias)
 	fmt.Println(queryText)
 
-	res, err := db.SqlDb.Exec(queryText)
+	res, err := conn.SqlDb.Exec(queryText)
 
 	if err != nil {
-		return 0, nil
+		return 0, err
 	}
 
 	return res.RowsAffected()
