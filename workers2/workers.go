@@ -5,8 +5,11 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"sync"
 	"time"
 )
+
+var wg sync.WaitGroup
 
 func Run() {
 	// Poderia ser um channel de uma struct de 'Funcionario'
@@ -15,6 +18,7 @@ func Run() {
 	// Quantidade de processos paralelos
 	councurrency := 500
 	for i := 1; i <= councurrency; i++ {
+		wg.Add(1)
 		go worker(requestId, i)
 	}
 
@@ -22,10 +26,13 @@ func Run() {
 	for i := 1; i <= 1000; i++ {
 		requestId <- i
 	}
+
+	wg.Wait()
 }
 
 // Poderia ser uma função que faz algum processamento em uma struct de 'Funcionario'
 func worker(requestId chan int, w int) {
+	defer wg.Done()
 	for r := range requestId {
 		// Adicionado função anônima para que ao termino da execução da função seja executado o 'defer'
 		// Sem a função a execução do 'defer' só ocorreria ao termino da função 'worker'
