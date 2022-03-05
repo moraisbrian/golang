@@ -4,10 +4,13 @@ import (
 	"fmt"
 	"go-test/database"
 	"go-test/models"
+	"sync"
 )
 
+var wg sync.WaitGroup
+
 func main() {
-	// createReminders()
+	createReminders()
 	// readReminders()
 	// deleteReminder()
 	// updateReminder()
@@ -44,12 +47,14 @@ func createReminders() {
 	channel := make(chan models.Reminder)
 
 	for i := 1; i <= 50; i++ {
+		wg.Add(1)
 		go worker(channel)
 	}
 
 	for i := range reminders {
 		channel <- reminders[i]
 	}
+	wg.Wait()
 }
 
 func readReminders() {
@@ -65,6 +70,7 @@ func readReminders() {
 }
 
 func worker(channel chan models.Reminder) {
+	defer wg.Done()
 	for reminder := range channel {
 		res, err := database.CreateReminder(reminder.Title, reminder.Description, reminder.Alias)
 
