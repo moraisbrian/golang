@@ -27,7 +27,9 @@ func Run() {
 		requestId <- i
 	}
 
+	close(requestId)
 	wg.Wait()
+	fmt.Println("Fim...")
 }
 
 // Poderia ser uma função que faz algum processamento em uma struct de 'Funcionario'

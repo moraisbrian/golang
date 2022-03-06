@@ -54,6 +54,8 @@ func createReminders() {
 	for i := range reminders {
 		channel <- reminders[i]
 	}
+
+	close(channel)
 	wg.Wait()
 }
 
